@@ -19,4 +19,5 @@ print(len(words_eng_1))
 print(len(words_eng_2))
 print(len(eng_sych))
 print(len(rus_sych))
+print(1)
 
