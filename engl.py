@@ -38,4 +38,4 @@ print('ошибок:', k)
 for i in ERROR:
     print(i)
     print(1)
-    print(2)
+    print(1)
