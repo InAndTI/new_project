@@ -4,7 +4,11 @@ from selenium.common.exceptions import NoSuchElementException, WebDriverExceptio
 from time import sleep
 
 
-def translate(en_word):
+def translate(en_word: str):
+    en_word = en_word.split(' ')
+    for i in range(len(en_word) - 1):
+        en_word[0] += '%20' + en_word[i + 1]
+    en_word = en_word[0]
     try:
         url = f"https://translate.google.com/?hl=ru&sl=auto&tl=ru&text={en_word}&op=translate"
         driver = webdriver.Chrome()
@@ -25,3 +29,6 @@ def translate(en_word):
         return a
     except WebDriverException:
         return "нет интернета"
+
+
+print(translate('run'))
