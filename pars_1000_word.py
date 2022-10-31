@@ -9,7 +9,6 @@ soup = BeautifulSoup(page.text, "html.parser")
 ru_word_trash = soup.find_all('li', style="font-weight: 400;")
 for word_trash in ru_word_trash:
     en_word = re.findall(r"[a-z]+", word_trash.text)
-
     print(en_word[0])
     ru_word = re.findall(r"[а-я][^/]*[а-я]", word_trash.text)
     print(ru_word)
