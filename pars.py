@@ -31,4 +31,3 @@ def translate(en_word: str):
         return "нет интернета"
 
 
-print(translate('run'))
