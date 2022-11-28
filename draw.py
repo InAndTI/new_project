@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from pars import translate
+from bd import *
+import random
 
 
 class Ui_MainWindow(object):
@@ -36,6 +38,7 @@ class Ui_MainWindow(object):
         self.pushButton_word = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_word.setGeometry(QtCore.QRect(90, 150, 93, 28))
         self.pushButton_word.setObjectName("pushButton_word")
+        self.pushButton_word.clicked.connect(self.bd)
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(370, 460, 55, 16))
         self.label_8.setObjectName("label_8")
@@ -98,6 +101,9 @@ class Ui_MainWindow(object):
     def google(self):
         self.label_5.setText(QtCore.QCoreApplication.translate("MainWindow", translate(self.translate.toPlainText())))
 
+    def bd(self):
+        self.word_dict = the_word(self.spinBox_start_word.text(), self.spinBox_amount_verb.text())
+
     def retranslateUi(self, Settings):
         _translate = QtCore.QCoreApplication.translate
         Settings.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -128,7 +134,10 @@ class Settings(QtWidgets.QMainWindow, Ui_MainWindow):
             self.test()
 
     def test(self):
+        print(random.choice(list(self.word_dict.keys())))
         print(self.engl_word.text())
+        self.label_2.setText(QtCore.QCoreApplication.translate("MainWindow", random.choice(list(self.word_dict.keys()))))
+
 
 if __name__ == "__main__":
     import sys

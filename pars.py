@@ -31,3 +31,5 @@ def translate(en_word: str):
         return "нет интернета"
 
 
+if __name__ == "__main__":
+    print(translate('run'))
