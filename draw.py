@@ -7,6 +7,7 @@ import random
 
 class Ui_MainWindow(object):
     def setupUi(self, Settings):
+        self.error = 0
         Settings.setObjectName("MainWindow")
         Settings.resize(819, 570)
         self.centralwidget = QtWidgets.QWidget(Settings)
@@ -14,20 +15,20 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(620, 80, 55, 16))
         self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(210, 170, 331, 51))
+        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser.setGeometry(QtCore.QRect(240, 171, 256, 61))
         font = QtGui.QFont()
-        font.setPointSize(26)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
+        font.setPointSize(12)
+        self.textBrowser.setFont(font)
+        self.textBrowser.setObjectName("textBrowser")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(370, 360, 55, 16))
+        self.label_4.setGeometry(QtCore.QRect(370, 360, 190, 16))
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(650, 480, 55, 16))
         self.label_5.setObjectName("label_5")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(370, 410, 55, 16))
+        self.label_6.setGeometry(QtCore.QRect(370, 410, 190, 16))
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(120, 70, 55, 16))
@@ -40,7 +41,7 @@ class Ui_MainWindow(object):
         self.pushButton_word.setObjectName("pushButton_word")
         self.pushButton_word.clicked.connect(self.bd)
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
-        self.label_8.setGeometry(QtCore.QRect(370, 460, 55, 16))
+        self.label_8.setGeometry(QtCore.QRect(370, 460, 190, 16))
         self.label_8.setObjectName("label_8")
         self.label_9 = QtWidgets.QLabel(self.centralwidget)
         self.label_9.setGeometry(QtCore.QRect(280, 360, 55, 16))
@@ -102,13 +103,18 @@ class Ui_MainWindow(object):
         self.label_5.setText(QtCore.QCoreApplication.translate("MainWindow", translate(self.translate.toPlainText())))
 
     def bd(self):
-        self.word_dict = the_word(self.spinBox_start_word.text(), self.spinBox_amount_verb.text())
+        self.word_dict = the_word(self.spinBox_start_word.text(), self.spinBox_amount_word.text())
+        self.textBrowser.setHtml(
+            QtCore.QCoreApplication.translate("MainWindow", random.choice(list(self.word_dict.keys()))))
+        self.engl_word.setText("")
+        self.label_12.setText(
+            QtCore.QCoreApplication.translate("MainWindow", str(len(self.word_dict.keys()))))
 
     def retranslateUi(self, Settings):
         _translate = QtCore.QCoreApplication.translate
         Settings.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "verb"))
-        self.label_2.setText(_translate("MainWindow", "ru_word"))
+        self.textBrowser.setHtml(_translate("MainWindow", "ru_word"))
         self.label_4.setText(_translate("MainWindow", "1"))
         self.label_5.setText(_translate("MainWindow", "answer"))
         self.label_6.setText(_translate("MainWindow", "2"))
@@ -120,7 +126,7 @@ class Ui_MainWindow(object):
         self.label_10.setText(_translate("MainWindow", "en_your"))
         self.label_11.setText(_translate("MainWindow", "trye_en"))
         self.label_12.setText(_translate("MainWindow", "num"))
-        self.translate.setPlainText(_translate("MainWindow", "r"))
+        self.translate.setPlainText(_translate("MainWindow", ""))
         self.pushButton.setText(_translate("MainWindow", "translate"))
 
 
@@ -134,9 +140,49 @@ class Settings(QtWidgets.QMainWindow, Ui_MainWindow):
             self.test()
 
     def test(self):
-        print(random.choice(list(self.word_dict.keys())))
-        print(self.engl_word.text())
-        self.label_2.setText(QtCore.QCoreApplication.translate("MainWindow", random.choice(list(self.word_dict.keys()))))
+        if self.engl_word.text() in self.word_dict[self.textBrowser.toPlainText()]:
+            self.word_dict[self.textBrowser.toPlainText()].remove(self.engl_word.text())
+            self.label_4.setText(QtCore.QCoreApplication.translate("MainWindow", self.textBrowser.toPlainText()))
+            self.label_6.setText(QtCore.QCoreApplication.translate("MainWindow", self.engl_word.text()))
+            self.label_8.setText(QtCore.QCoreApplication.translate("MainWindow", self.engl_word.text()))
+            self.engl_word.setText("")
+            self.label_4.setStyleSheet("color: rgb(25, 255, 0);")
+            self.label_6.setStyleSheet("color: rgb(25, 255, 0);")
+            self.label_8.setStyleSheet("color: rgb(25, 255, 0);")
+            self.label_9.setStyleSheet("color: rgb(25, 255, 0);")
+            self.label_10.setStyleSheet("color: rgb(25, 255, 0);")
+            self.label_11.setStyleSheet("color: rgb(25, 255, 0);")
+        else:
+            self.label_4.setText(QtCore.QCoreApplication.translate("MainWindow", self.textBrowser.toPlainText()))
+            self.label_6.setText(QtCore.QCoreApplication.translate("MainWindow", self.engl_word.text()))
+            self.label_8.setText(
+                QtCore.QCoreApplication.translate("MainWindow", ','.join(self.word_dict[self.textBrowser.toPlainText()])))
+            self.textBrowser.setHtml(
+                QtCore.QCoreApplication.translate("MainWindow", random.choice(list(self.word_dict.keys()))))
+            self.engl_word.setText("")
+            self.label_4.setStyleSheet("color: rgb(255, 0, 4);")
+            self.label_6.setStyleSheet("color: rgb(255, 0, 4);")
+            self.label_8.setStyleSheet("color: rgb(255, 0, 4);")
+            self.label_9.setStyleSheet("color: rgb(255, 0, 4);")
+            self.label_10.setStyleSheet("color: rgb(255, 0, 4);")
+            self.label_11.setStyleSheet("color: rgb(255, 0, 4);")
+            self.error += 1
+
+        if not len(self.word_dict[self.textBrowser.toPlainText()]):
+            self.word_dict.pop(self.textBrowser.toPlainText())
+            if len(self.word_dict.keys()):
+                self.textBrowser.setHtml(
+                    QtCore.QCoreApplication.translate("MainWindow", random.choice(list(self.word_dict.keys()))))
+                self.label_12.setText(
+                    QtCore.QCoreApplication.translate("MainWindow", str(len(self.word_dict.keys()))))
+            else:
+                self.textBrowser.setHtml(
+                    QtCore.QCoreApplication.translate("MainWindow", ""))
+                self.label_12.setText(QtCore.QCoreApplication.translate("MainWindow", str(self.error)))
+                self.error = 0
+            self.engl_word.setText("")
+
+
 
 
 if __name__ == "__main__":

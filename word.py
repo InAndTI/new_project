@@ -5,19 +5,22 @@ words_eng_2 = 'were had said went got made knew thought took saw came wanted use
 eng_sych = 'as for on with from by hot word other time air well also small end home hand here must big high such light kind picture again animal point mother world near father new part place after back little only round year good under name very through just sentence great low line cause before right boy old there up way about then would like so long thing more day number sound water may down side now head own page country answer still plant food sun between eye never last city tree hard story far sea left late while night real life few book science room friend idea fish mountain once horse sure colour face main together next white children example ease paper group always music both mark often river car feet second enough plain girl usual young ready red list bird soon body dog family door black short wind question complete ship half rock order fire problem top street multiply nothing full'.split(' ')
 rus_sych = 'как для на с из от горячий слово другой время воздух хорошо также маленький конец дом рука здесь должен большой высокий такой свет\легкий добрый картина снова животное точка мать мир близко отец новый часть место после назад немного только круглый год хороший под имя очень через только\просто предложение отличный низкий линия причина до право мальчик старый там вверх путь о затем бы нравиться так длинный вещь больше день номер звук вода может вниз сторона сейчас голова свой страница страна ответ все.еще растение еда солнце между глаз никогда последний город дерево тяжелый история далеко море лево поздно пока ночь реальный жизнь несколько книга наука комната друг идея рыба гора однажды лошадь конечно цвет лицо главный вместе следующий белый дети пример легкость бумага группа всегда музыка оба отметка часто река машина ноги секунда хватает простой девочка обычно молодой готовый красный список птица скоро тело собака семья дверь черный короткий ветер вопрос завершенный корабль половина камень приказ огонь проблема верх улица умножать ничего полный'.split(' ')
 
-c = words_rus
-b = rus_sych
-a = set(b)
-for i in b:
-    if b.count(i) > 1:
-        print(i)
-for i in c:
-    if c.count(i) > 1:
-        print(i)
-print(len(words_rus))
-print(len(words_eng_1))
-print(len(words_eng_2))
-print(len(eng_sych))
-print(len(rus_sych))
-print(1)
+# c = words_rus
+# b = rus_sych
+# a = set(b)
+# for i in b:
+#     if b.count(i) > 1:
+#         print(i)
+# for i in c:
+#     if c.count(i) > 1:
+#         print(i)
+# print(len(words_rus))
+# print(len(words_eng_1))
+# print(len(words_eng_2))
+# print(len(eng_sych))
+# print(len(rus_sych))
+# print(1)
 
+a = ['1', '2']
+if '1' in a:
+    print(1)
